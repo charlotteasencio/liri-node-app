@@ -12,17 +12,23 @@ var command = input[2];
 var media = input.splice(3).join(" ");
 
 //get tweets
-	var params = {screen_name: "charlottevennis", count: 20};
+	var params = {screen_name: media, count: 20};
 
 if(command == "my-tweets"){
 	
 		client.get("statuses/user_timeline", params, function(error, tweets, response) {
 			if (!error) {
-				for (i = 0; i < tweets.length; i ++){
-					console.log("Tweet: " + "'" + tweets[i].temediat + "'" + " Created At: " + tweets[i].created_at);
+				tweetsArray = tweets;
+
+				for(i=0; i<tweetsArray.length; i++){
+					console.log("Created at: " + tweetsArray[i].created_at);
+					console.log("Text: " + tweetsArray[i].text);
 				}
-			} 
-		}); //spotify
+			}
+			else{
+				console.log(error);
+			}
+			});//spotify
 	} else if (command == "spotify-this-song"){
 
 	if (!media){
