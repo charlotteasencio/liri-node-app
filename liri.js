@@ -29,22 +29,41 @@ function myTweets(){
 			});
 	} 
 
-//spotify 401 error; cannot get to work
+//spotify if !media not working
 function getSpotify(){
-	if (!media){
-        	media = 'The Sign';
-    	}
-		spotify.search({ type: 'track', query: media }, function(err, data) {
-			if (err) {
-			  return console.log('Error occurred: ' + err);
-			}
 
-		  console.log(data); 
-		  });
-	} 
+  spotify.search({
+    type:"track",
+    query: media}, function(err, data){
+
+    if (err) {
+      console.log("Error occurred: " + err);
+      return;
+		}
+			
+  if(!media){
+      (media = "The Sign")
+  }
+  else{
+
+  for (i = 0; i < 5; i++){
+
+			var results = data.tracks.items[i];
+
+      console.log("Artist: " + results.artists[0].name);
+      console.log("Song: " + results.name);
+      console.log("Song Link: " + results.external_urls.spotify);
+      console.log("Album: " + results.album.name);
+    }
+	}
+});
+}
 
 	//movies
 	function getMovie(){
+		if (!media){
+			media = "Mr. Nobody";
+		}
 
 	request("http://www.omdbapi.com/?t=" + media + "&y=&plot=short&apikey=trilogy", function(error, response, body) {
 	
