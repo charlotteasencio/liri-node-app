@@ -42,9 +42,8 @@ function getSpotify(){
 		}
 			
   if(!media){
-      (media = "The Sign")
-  }
-  else{
+      (media = "The Sign");
+  } else{
 
   for (i = 0; i < 5; i++){
 
@@ -81,7 +80,7 @@ function getSpotify(){
 	}); 
 }  
 
-//do stuff; not working yet
+//do stuff
 function doStuff(){
 	fs.readFile("random.txt", "utf8", function(error, data) {
 
@@ -93,9 +92,18 @@ function doStuff(){
 		var dataArr = data.split(",");
 
 		console.log(dataArr);
+
+//grab the command and media from the dataArr
+		command = dataArr[0];
+		media = dataArr[1];
+
+//use command and media in already written functions
+		run();
+
 	  });
 }
 
+function run(){
 if(command == "my-tweets"){
 	myTweets();
 } else if (command == "spotify-this-song"){
@@ -105,3 +113,6 @@ if(command == "my-tweets"){
 } else if (command == "do-what-it-says"){
 	doStuff();
 }
+}
+
+run();
