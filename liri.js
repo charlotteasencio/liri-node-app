@@ -12,10 +12,8 @@ var command = input[2];
 var media = input.splice(3).join(" ");
 
 //get tweets
+function myTweets(){
 	var params = {screen_name: media, count: 20};
-
-if(command == "my-tweets"){
-	
 		client.get("statuses/user_timeline", params, function(error, tweets, response) {
 			if (!error) {
 				tweetsArray = tweets;
@@ -28,9 +26,11 @@ if(command == "my-tweets"){
 			else{
 				console.log(error);
 			}
-			});//spotify 401 error; cannot get to work
-	} else if (command == "spotify-this-song"){
+			});
+	} 
 
+//spotify 401 error; cannot get to work
+function getSpotify(){
 	if (!media){
         	media = 'The Sign';
     	}
@@ -38,10 +38,13 @@ if(command == "my-tweets"){
 			if (err) {
 			  return console.log('Error occurred: ' + err);
 			}
-		   
+
 		  console.log(data); 
-		  });//movies
-	} else if (command=="movie-this") {
+		  });
+	} 
+
+	//movies
+	function getMovie(){
 
 	request("http://www.omdbapi.com/?t=" + media + "&y=&plot=short&apikey=trilogy", function(error, response, body) {
 	
@@ -56,8 +59,11 @@ if(command == "my-tweets"){
 		console.log("Plot: ",JSON.parse(body).Plot);
 		console.log("Actors: ",JSON.parse(body).Actors);
 	  }
-	}); //do stuff; not working yet
-}  if (command == "do-what-it-says") {
+	}); 
+}  
+
+//do stuff; not working yet
+function doStuff(){
 	fs.readFile("random.txt", "utf8", function(error, data) {
 
 		if (error) {
@@ -68,7 +74,15 @@ if(command == "my-tweets"){
 		var dataArr = data.split(",");
 
 		console.log(dataArr);
-		dataArr[0] = command;
-		dataArr[1] = media;
 	  });
+}
+
+if(command == "my-tweets"){
+	myTweets();
+} else if (command == "spotify-this-song"){
+	getSpotify();
+} else if (command == "movie-this"){
+	getMovie();
+} else if (command == "do-what-it-says"){
+	doStuff();
 }
