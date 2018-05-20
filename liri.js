@@ -28,7 +28,7 @@ if(command == "my-tweets"){
 			else{
 				console.log(error);
 			}
-			});//spotify
+			});//spotify 401 error; cannot get to work
 	} else if (command == "spotify-this-song"){
 
 	if (!media){
@@ -56,7 +56,7 @@ if(command == "my-tweets"){
 		console.log("Plot: ",JSON.parse(body).Plot);
 		console.log("Actors: ",JSON.parse(body).Actors);
 	  }
-	}); //do stuff
+	}); //do stuff; not working yet
 }  if (command == "do-what-it-says") {
 	fs.readFile("random.txt", "utf8", function(error, data) {
 
