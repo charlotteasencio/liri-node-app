@@ -19,18 +19,23 @@ function myTweets(){
 				tweetsArray = tweets;
 
 				for(i=0; i<tweetsArray.length; i++){
+					console.log("-------------------------------------------");
 					console.log("Created at: " + tweetsArray[i].created_at);
 					console.log("Text: " + tweetsArray[i].text);
+					console.log("-------------------------------------------");
 				}
 			}
 			else{
 				console.log(error);
 			}
-			});
+		});
 	} 
 
 //spotify if !media not working
 function getSpotify(){
+	if (!media){
+		media = "The Sign";
+	}
 
   spotify.search({
     type:"track",
@@ -39,22 +44,50 @@ function getSpotify(){
     if (err) {
       console.log("Error occurred: " + err);
       return;
-		}
-			
-  if(!media){
-      (media = "The Sign");
-  } else{
+		}  else{
 
-  for (i = 0; i < 5; i++){
+  	for (i = 0; i < 1; i++){
 
 			var results = data.tracks.items[i];
 
+			console.log("-------------------------------------------");
       console.log("Artist: " + results.artists[0].name);
       console.log("Song: " + results.name);
       console.log("Song Link: " + results.external_urls.spotify);
-      console.log("Album: " + results.album.name);
-    }
-	}
+			console.log("Album: " + results.album.name);
+			console.log("-------------------------------------------");
+    	}
+		}
+	});
+}
+
+//spofity the sign
+function spotifyBlank(){
+	if (!media) {
+		media = "The Sign Ace of Base";
+}
+
+	spotify.search({
+    type:"track",
+    query: media}, function(err, data){
+
+    if (err) {
+      console.log("Error occurred: " + err);
+      return;
+		} else {
+
+  	for (i = 0; i < 1; i++){
+
+			var results = data.tracks.items[i];
+
+			console.log("-------------------------------------------");
+      console.log("Artist: " + results.artists[0].name);
+      console.log("Song: " + results.name);
+      console.log("Song Link: " + results.external_urls.spotify);
+			console.log("Album: " + results.album.name);
+			console.log("-------------------------------------------");
+    	}
+		} 
 });
 }
 
@@ -67,7 +100,8 @@ function getSpotify(){
 	request("http://www.omdbapi.com/?t=" + media + "&y=&plot=short&apikey=trilogy", function(error, response, body) {
 	
 	  if (!error && response.statusCode === 200) {
-	
+
+		console.log("-------------------------------------------");
 		console.log("Title: ",JSON.parse(body).Title);
 		console.log("Year: ",JSON.parse(body).Year);
 		console.log("IMDB Rating: ",JSON.parse(body).imdbRating);
@@ -76,6 +110,7 @@ function getSpotify(){
 		console.log("Language: ",JSON.parse(body).Language);
 		console.log("Plot: ",JSON.parse(body).Plot);
 		console.log("Actors: ",JSON.parse(body).Actors);
+		console.log("-------------------------------------------");
 	  }
 	}); 
 }  
@@ -100,19 +135,19 @@ function doStuff(){
 //use command and media in already written functions
 		run();
 
-	  });
+	});
 }
 
 function run(){
-if(command == "my-tweets"){
-	myTweets();
-} else if (command == "spotify-this-song"){
-	getSpotify();
-} else if (command == "movie-this"){
-	getMovie();
-} else if (command == "do-what-it-says"){
-	doStuff();
-}
+	if(command == "my-tweets"){
+		myTweets();
+	} else if (command == "spotify-this-song"){
+		getSpotify();
+	} else if (command == "movie-this"){
+		getMovie();
+	} else if (command == "do-what-it-says"){
+		doStuff();
+	} 
 }
 
 run();
