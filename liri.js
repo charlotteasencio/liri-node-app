@@ -31,10 +31,10 @@ function myTweets(){
 		});
 	} 
 
-//spotify if !media not working
+//spotify
 function getSpotify(){
 	if (!media){
-		media = "The Sign";
+		  media="The Sign Ace of Base";
 	}
 
   spotify.search({
@@ -59,36 +59,6 @@ function getSpotify(){
     	}
 		}
 	});
-}
-
-//spofity the sign
-function spotifyBlank(){
-	if (!media) {
-		media = "The Sign Ace of Base";
-}
-
-	spotify.search({
-    type:"track",
-    query: media}, function(err, data){
-
-    if (err) {
-      console.log("Error occurred: " + err);
-      return;
-		} else {
-
-  	for (i = 0; i < 1; i++){
-
-			var results = data.tracks.items[i];
-
-			console.log("-------------------------------------------");
-      console.log("Artist: " + results.artists[0].name);
-      console.log("Song: " + results.name);
-      console.log("Song Link: " + results.external_urls.spotify);
-			console.log("Album: " + results.album.name);
-			console.log("-------------------------------------------");
-    	}
-		} 
-});
 }
 
 	//movies
